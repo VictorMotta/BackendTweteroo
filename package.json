@@ -1,0 +1,24 @@
+{
+    "name": "projeto12-tweteroo",
+    "version": "1.0.0",
+    "description": "Api tweteroo",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "start": "node ./src/app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/VictorMotta/Tweteroo.git"
+    },
+    "author": "Victor Motta",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/VictorMotta/Tweteroo/issues"
+    },
+    "homepage": "https://github.com/VictorMotta/Tweteroo#readme",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2"
+    }
+}
