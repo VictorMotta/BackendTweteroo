@@ -6,9 +6,114 @@ const usersConnected = [];
 
 const tweets = [
     {
-    username: "bobesponja",
-    avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
-    tweet: "eu amo o hub",
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
+    },
+    {
+        username: "bobesponja",
+        avatar: "https://almeidajunior-prod1.s3.amazonaws.com/prod/uploads/news/5d81505ac6770.jpg",
+        tweet: "eu amo o hub",
     },
 ];
 
@@ -23,16 +128,16 @@ app.use(cors());
 app.post("/sign-up", (req, res) => {
     const user = req.body;
     usersConnected.push(user);
-    res.send({ message: "OK" }); 
+    res.send({ message: "OK" });
 });
 
 app.post("/tweets", (req, res) => {
     const tweet = req.body;
-    
-    const userConnected = usersConnected.find( item => tweet.username === item.username)
+
+    const userConnected = usersConnected.find(item => tweet.username === item.username)
 
 
-    if(userConnected){
+    if (userConnected) {
         const body = {
             username: userConnected.username,
             avatar: userConnected.avatar,
@@ -46,8 +151,13 @@ app.post("/tweets", (req, res) => {
 });
 
 app.get("/tweets", (req, res) => {
-    
-    res.send(tweets);
+    if (tweets.length > 10) {
+        const firstNumList = tweets.length - 10;
+        const lastTweets = tweets.filter((item, i)=> i >= firstNumList);
+        return res.send(lastTweets);
+    }
+
+    return res.send(tweets);
 });
 
 app.listen(PORT, () => {
