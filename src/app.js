@@ -36,7 +36,7 @@ app.post("/tweets", (req, res) => {
         return res.send({ message: "OK" });
     };
 
-    return res.send({ message: "UNAUTHORIZED" });
+    return res.send("UNAUTHORIZED");
 });
 
 app.get("/tweets", (req, res) => {
