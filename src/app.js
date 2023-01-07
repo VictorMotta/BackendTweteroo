@@ -7,6 +7,8 @@ const usersConnected = [];
 const tweets = [];
 
 
+
+
 const app = express();
 
 app.use(express.json());
@@ -18,11 +20,34 @@ app.use(cors());
 
 app.get("/tweets", (req, res) => {
 
-    if (tweets.length > 10) {
-        const firstNumList = tweets.length - 10;
-        const lastTweets = tweets.filter((item, i)=> i >= firstNumList);
-        return res.send(lastTweets);
+    const {page} = req.query;
+    console.log(page);
+
+    // page = 1 > pega os primeiros 10
+    // page = 2 > pega do 11 até o 20
+    const pageInicial = ((Number(page) - 1) * 10);
+    const pageFim = (Number(page) * 10);
+
+
+
+    if(page < 1){
+        return res.status(400).send("Informe uma página válida!");
     }
+
+    if (tweets.length > 10) {
+        if(page > 1){
+            const tweetsPages = tweets.slice(pageInicial, pageFim);
+            return res.send(tweetsPages)
+        }
+        const tweetsPagesFirstTen = tweets.slice(0, 10);
+        return res.send(tweetsPagesFirstTen);
+    }
+
+    // if (tweets.length > 10) {
+    //     const firstNumList = tweets.length - 10;
+    //     const lastTweets = tweets.filter((item, i)=> i >= firstNumList);
+    //     return res.send(lastTweets);
+    // }
 
     return res.send(tweets);
 });
