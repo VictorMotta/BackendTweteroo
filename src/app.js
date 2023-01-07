@@ -43,12 +43,6 @@ app.get("/tweets", (req, res) => {
         return res.send(tweetsPagesFirstTen);
     }
 
-    // if (tweets.length > 10) {
-    //     const firstNumList = tweets.length - 10;
-    //     const lastTweets = tweets.filter((item, i)=> i >= firstNumList);
-    //     return res.send(lastTweets);
-    // }
-
     return res.send(tweets);
 });
 
