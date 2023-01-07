@@ -44,7 +44,7 @@ app.post("/sign-up", (req, res) => {
         return res.status(400).send("Todos os campos são obrigatórios!");
     }
 
-    if(!typeof user.username === "string" || !typeof user.avatar === "string"){
+    if(!(typeof user.username === "string") || !(typeof user.avatar === "string")){
         return res.sendStatus(400);
     }
 
@@ -63,9 +63,10 @@ app.post("/tweets", (req, res) => {
     }
 
 
-    if(!typeof tweet.tweet === "string"){
+    if(!(typeof tweet.tweet === "string")){
         return res.sendStatus(400);
     }
+
 
     const userConnected = usersConnected.find(item => item.username === user)
 
