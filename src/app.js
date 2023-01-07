@@ -21,7 +21,7 @@ app.use(cors());
 app.get("/tweets", (req, res) => {
 
     const {page} = req.query;
-    console.log(page);
+
 
     // page = 1 > pega os primeiros 10
     // page = 2 > pega do 11 até o 20
