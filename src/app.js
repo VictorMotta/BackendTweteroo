@@ -14,17 +14,54 @@ app.use(cors());
 
 
 
+
+
+app.get("/tweets", (req, res) => {
+
+    if (tweets.length > 10) {
+        const firstNumList = tweets.length - 10;
+        const lastTweets = tweets.filter((item, i)=> i >= firstNumList);
+        return res.send(lastTweets);
+    }
+
+    return res.send(tweets);
+});
+
+
+app.get("/tweets/:user", (req, res) => {
+    const { user } = req.params;
+
+    const tweetSpecificUser = tweets.filter(item => item.username === user);
+
+    res.send(tweetSpecificUser);
+
+});
+
+
 app.post("/sign-up", (req, res) => {
     const user = req.body;
+
+    if(!user.username || !user.avatar){
+        return res.status(400).send("Todos os campos são obrigatórios!");
+    }
+
     usersConnected.push(user);
-    res.send({ message: "OK" });
+    res.status(201).send({ message: "OK" }); 
 });
+
+
 
 app.post("/tweets", (req, res) => {
     const tweet = req.body;
+    const user = req.headers.user; 
 
-    const userConnected = usersConnected.find(item => tweet.username === item.username)
+    if(!user || !tweet.tweet){
+        return res.status(400).send("Todos os campos são obrigatórios!");
+    }
 
+    const userConnected = usersConnected.find(item => item.username === user)
+
+   
 
     if (userConnected) {
         const body = {
@@ -36,17 +73,7 @@ app.post("/tweets", (req, res) => {
         return res.send({ message: "OK" });
     };
 
-    return res.send("UNAUTHORIZED");
-});
-
-app.get("/tweets", (req, res) => {
-    if (tweets.length > 10) {
-        const firstNumList = tweets.length - 10;
-        const lastTweets = tweets.filter((item, i)=> i >= firstNumList);
-        return res.send(lastTweets);
-    }
-
-    return res.send(tweets);
+    return res.sendStatus(401);
 });
 
 app.listen(PORT, () => {
