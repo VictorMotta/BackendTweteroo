@@ -34,7 +34,6 @@ app.get("/tweets/:user", (req, res) => {
     const tweetSpecificUser = tweets.filter(item => item.username === user);
 
     res.send(tweetSpecificUser);
-
 });
 
 
@@ -43,6 +42,10 @@ app.post("/sign-up", (req, res) => {
 
     if(!user.username || !user.avatar){
         return res.status(400).send("Todos os campos são obrigatórios!");
+    }
+
+    if(!typeof user.username === "string" || !typeof user.avatar === "string"){
+        return res.sendStatus(400);
     }
 
     usersConnected.push(user);
@@ -59,6 +62,11 @@ app.post("/tweets", (req, res) => {
         return res.status(400).send("Todos os campos são obrigatórios!");
     }
 
+
+    if(!typeof tweet.tweet === "string"){
+        return res.sendStatus(400);
+    }
+
     const userConnected = usersConnected.find(item => item.username === user)
 
    
@@ -70,7 +78,7 @@ app.post("/tweets", (req, res) => {
             tweet: tweet.tweet,
         };
         tweets.push(body);
-        return res.send({ message: "OK" });
+        return res.status(201).send({ message: "OK" });
     };
 
     return res.sendStatus(401);
